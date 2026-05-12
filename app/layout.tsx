@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/home/Navbar/page";
 import Footer from "./components/home/Footer/page";
 import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import Providers from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,10 +34,12 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col w-full">
         <div className="w-full lg:max-w-[1400px] mx-auto">
           <ClerkProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </ClerkProvider>
+            <Providers>
+              <Navbar />
+              {children}
+              <Footer />
+            </Providers>
+          </ClerkProvider>
         </div>
 
       </body>

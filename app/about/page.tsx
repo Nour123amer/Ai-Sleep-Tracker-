@@ -1,3 +1,4 @@
+import AddNewRecord from '../components/AddNewRecord'
 import AboutHero from './AboutHero/page'
 import CTA from './CTA/page'
 import Mession from './Mission/page'
