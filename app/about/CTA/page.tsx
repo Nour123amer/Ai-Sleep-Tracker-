@@ -1,10 +1,13 @@
-import React from "react";
-import { ArrowRight, MoonStar } from "lucide-react";
+"use client";
+import { SignInButton } from "@clerk/nextjs";
+import { ArrowRight, MoonStar, Router } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function CTA() {
+  const router = useRouter();
   return (
     <section className="relative py-24 px-6 bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 text-white overflow-hidden">
-      
+
       {/* glow background */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-white blur-3xl rounded-full" />
@@ -28,10 +31,14 @@ export default function CTA() {
         </p>
 
         {/* button */}
-        <button className="group bg-white text-purple-600 px-6 py-3 rounded-full font-semibold flex items-center gap-2 mx-auto hover:scale-105 transition">
-          Get Started
-          <ArrowRight className="group-hover:translate-x-1 transition" size={18} />
-        </button>
+        <SignInButton mode="modal">
+          <button
+            className="group cursor-pointer bg-white text-purple-600 px-6 py-3 rounded-full font-semibold flex items-center gap-2 mx-auto hover:scale-105 transition">
+            Get Started
+            <ArrowRight className="group-hover:translate-x-1 transition" size={18} />
+          </button>
+        </SignInButton>
+
 
       </div>
     </section>

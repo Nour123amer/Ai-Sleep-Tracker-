@@ -5,6 +5,8 @@ import Navbar from "./components/home/Navbar/page";
 import Footer from "./components/home/Footer/page";
 import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import Providers from "./providers";
+import { Toaster, toast } from 'sonner';
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,19 +28,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col w-full">
-        <div className="w-full lg:max-w-[1400px] mx-auto">
+        <div className="w-full lg:max-w-350 mx-auto ">
           <ClerkProvider>
             <Providers>
               <Navbar />
-              {children}
+              <div className="py-4">
+                {children}
+              </div>
               <Footer />
             </Providers>
+            <Toaster position="top-right" richColors /> {/* Sonner Toaster for notifications */}
           </ClerkProvider>
         </div>
 

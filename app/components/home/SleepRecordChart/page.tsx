@@ -40,7 +40,7 @@ const SleepRecordChart = () => {
 
                 <ResponsiveContainer width="100%" height="90%">
                     <BarChart
-                        barCategoryGap="10%"
+                        barCategoryGap="2%"
                         data={sleepData}
                     >
                         <CartesianGrid strokeDasharray="2 2" />

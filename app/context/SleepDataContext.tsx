@@ -1,5 +1,6 @@
 "use client";
 import { createContext, use, useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export type SleepRecord = {
     amount: number;
@@ -37,6 +38,7 @@ export const SleepDataProvider = ({ children }: { children: React.ReactNode }) =
 
     const deleteSleepRecord = (recordId: string) => {
         setSleepData(prevData => prevData.filter(record => record.id !== recordId));
+        toast.success("Record deleted successfully!");
     }
   
 

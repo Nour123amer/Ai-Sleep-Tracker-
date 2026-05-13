@@ -11,7 +11,7 @@ export const SleepHistory = () => {
       <h3 className="text-xl font-bold text-pink-500 text-center mb-6">Sleep History</h3>
       
       {sleepData?.map((record) => (
-          <div key={record.amount} className="border-t border-gray-100 pt-6">
+          <div key={record.id} className="border-t border-gray-100 pt-6">
         {/* Record Item */}
         <div className="relative border border-gray-100 rounded-lg p-4 flex justify-between items-center bg-white shadow-sm">
           <div className={`absolute left-0 top-0 bottom-0 w-1 rounded-l-lg ${

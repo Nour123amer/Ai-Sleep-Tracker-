@@ -2,6 +2,7 @@
 import addSleepRecord from "@/app/actions/addSleepRecord";
 import { SleepDataContext } from "@/app/context/SleepDataContext";
 import { useContext, useRef, useState } from "react";
+import { toast } from "sonner";
 
 export const SleepTrackerForm = () => {
     const formRef = useRef<HTMLFormElement>(null);
@@ -25,7 +26,8 @@ export const SleepTrackerForm = () => {
         addSleepRecord({
             amount,
             text: sleepQuality,
-            date
+            date,
+            id: Math.random().toString(36).substr(2, 9)
         })
 
         // const { error } = await addSleepRecord(formData);
@@ -82,7 +84,9 @@ export const SleepTrackerForm = () => {
                         className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600" min="0" max="12" step="0.5" />
                     <p className="text-center mt-2 text-sm text-gray-600">{amount} hours</p>
                     <button type="submit"
-                        className="w-full cursor-pointer py-3 bg-linear-to-r from-fuchsia-500 to-pink-500 text-white font-bold rounded-lg hover:opacity-90 transition-opacity">
+                        className="w-full cursor-pointer py-3 bg-linear-to-r from-fuchsia-500 to-pink-500 text-white font-bold rounded-lg hover:opacity-90 transition-opacity"
+                        onClick={()=>{toast.success("Record added successfully!")}}
+                        >
                         Add Sleep Record
                     </button>
                 </div>
