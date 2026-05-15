@@ -1,5 +1,7 @@
 
 "use client"
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Bar, BarChart, BarShapeProps, CartesianGrid, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
@@ -15,6 +17,7 @@ const MyCustomShape = (props: BarShapeProps) => {
 
 const SleepRecordChart = () => {
     const [sleepData, setSleepData] = useState([]);
+    const router = useRouter();
 
     useEffect(() => {
         const storedData = localStorage.getItem('sleepData');
@@ -38,7 +41,7 @@ const SleepRecordChart = () => {
                     </span>
                 </div>
 
-                <ResponsiveContainer width="100%" height="90%">
+                <ResponsiveContainer width="100%" height="70%">
                     <BarChart
                         barCategoryGap="2%"
                         data={sleepData}
@@ -69,6 +72,12 @@ const SleepRecordChart = () => {
                         />
                     </BarChart>
                 </ResponsiveContainer>
+                <Button 
+                    className='float-right bg-linear-to-r mt-6 cursor-pointer from-fuchsia-500 to-pink-500 text-white font-semibold shadow-md hover:scale-105 transition-transform duration-300'
+                    onClick={() => router.push('/ai-analysis')}
+                >
+                    AI Analysis
+                </Button>
             </div>
 
 

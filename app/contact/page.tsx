@@ -1,7 +1,40 @@
-import React from 'react'
+"use client"
+import { useState } from 'react'
 import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { toast } from 'sonner';
 
 export default function Contact() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e:React.FormEvent) => {
+    e.preventDefault();
+
+    const res = await fetch("/api/contact",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        subject,
+        message
+      })
+    })
+
+    if(res.ok){
+     toast.success("Message sent successfully!");
+     console.log("result ===>", res)
+    }
+
+  }
+
+
+
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-fuchsia-50 py-16 px-6">
@@ -75,7 +108,7 @@ export default function Contact() {
             We’ll respond within 24 hours.
           </p>
 
-          <form className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid md:grid-cols-2 gap-5">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -83,6 +116,9 @@ export default function Contact() {
                 </label>
 
                 <input
+                name='firstName'
+                value={firstName}
+                onChange={(e)=>{setFirstName(e.target.value)}}
                   type="text"
                   placeholder="John"
                   className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:ring-2 focus:ring-pink-400 transition"
@@ -95,6 +131,9 @@ export default function Contact() {
                 </label>
 
                 <input
+                name='lastName'
+                value={lastName}
+                onChange={(e)=>{setLastName(e.target.value)}}
                   type="text"
                   placeholder="Doe"
                   className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:ring-2 focus:ring-pink-400 transition"
@@ -108,6 +147,9 @@ export default function Contact() {
               </label>
 
               <input
+                name='email'
+                value={email}
+                onChange={(e)=>{setEmail(e.target.value)}}
                 type="email"
                 placeholder="you@example.com"
                 className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:ring-2 focus:ring-pink-400 transition"
@@ -120,6 +162,9 @@ export default function Contact() {
               </label>
 
               <input
+                name='subject'
+                value={subject}
+                onChange={(e)=>{setSubject(e.target.value)}}
                 type="text"
                 placeholder="Project Discussion"
                 className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:ring-2 focus:ring-pink-400 transition"
@@ -132,6 +177,9 @@ export default function Contact() {
               </label>
 
               <textarea
+                name='message'
+                value={message}
+                onChange={(e)=>{setMessage(e.target.value)}}
                 rows={5}
                 placeholder="Write your message..."
                 className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:ring-2 focus:ring-pink-400 transition resize-none"

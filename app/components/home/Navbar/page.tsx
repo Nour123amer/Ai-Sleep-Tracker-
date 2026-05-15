@@ -18,12 +18,12 @@ export default async function Navbar() {
           href="/"
           className="flex items-center gap-3"
         >
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center shadow-lg">
+          <div className="w-11 h-11 rounded-2xl bg-linear-to-r from-fuchsia-500 to-pink-500 flex items-center justify-center shadow-lg">
             <MoonStar className="text-white w-5 h-5" />
           </div>
 
           <div>
-            <h1 className="text-xl font-extrabold bg-gradient-to-r from-fuchsia-500 to-pink-500 bg-clip-text text-transparent">
+            <h1 className="text-xl font-extrabold bg-linear-to-r from-fuchsia-500 to-pink-500 bg-clip-text text-transparent">
               SleepTracker
             </h1>
 
@@ -35,12 +35,7 @@ export default async function Navbar() {
 
         {/* Nav Links */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
-          <Link
-            href="/"
-            className="hover:text-fuchsia-500 transition-colors"
-          >
-            Home
-          </Link>
+         
 
           <Link
             href="/about"
@@ -55,20 +50,31 @@ export default async function Navbar() {
           >
             Contact
           </Link>
+
+           <Link
+            href="/ai-analysis"
+            className="hover:text-fuchsia-500 transition-colors"
+          >
+            Ai Analysis
+          </Link>
         </div>
 
         {/* Auth */}
         {!user ? (
           <div className="flex items-center gap-3">
             <SignInButton mode="modal">
-              <button className="cursor-pointer px-5 py-2.5 rounded-xl bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white font-semibold shadow-md hover:scale-105 transition-transform duration-300">
+              <button className="cursor-pointer px-5 py-2.5 rounded-xl bg-linear-to-r from-fuchsia-500 to-pink-500 text-white font-semibold shadow-md hover:scale-105 transition-transform duration-300">
                 Sign In
               </button>
             </SignInButton>
           </div>
         ) : (
           <div className="flex items-center gap-4">
-            <div className="hidden md:block text-right">
+             <div className="p-1 rounded-full ">
+              <UserButton />
+            </div>
+
+            <div className="hidden md:block ">
               <p className="text-sm font-semibold text-gray-700">
                 {user.firstName}
               </p>
@@ -78,9 +84,7 @@ export default async function Navbar() {
               </p>
             </div>
 
-            <div className="p-1 rounded-full ">
-              <UserButton />
-            </div>
+           
           </div>
         )}
       </nav>

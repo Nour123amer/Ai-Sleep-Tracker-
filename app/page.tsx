@@ -9,11 +9,13 @@ import { SleepTrackerForm } from "./components/home/SleepTrackerForm/page";
 import { BestWorstSleep } from "./components/home/BestWorstSleep/page";
 import { SleepHistory } from "./components/home/SleepHistory/page";
 import SleepRecordChart from "./components/home/SleepRecordChart/page";
+import { syncUser } from "@/lib/syncUser";
 
 
 export default async function Home() {
   const user = await currentUser();
   console.log("current user", user)
+  await syncUser();
 
   if (!user) {
     return (

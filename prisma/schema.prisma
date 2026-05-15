@@ -5,30 +5,56 @@
 
 generator client {
   provider = "prisma-client-js"
-  }
+}
 
 datasource db {
   provider = "postgresql"
 }
 
 model User {
-  id        String   @id @default(uuid())
-  clerkUserId String   @unique
-  email     String   @unique
-  name      String?
-  imageUrl String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Records   Record[]
+  id            String         @id @default(uuid())
+  clerkUserId   String         @unique
+  email         String         @unique
+  name          String?
+  imageUrl      String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  Records       Record[]
 }
 
 model Record {
-  id        String   @id @default(uuid())
-  text     String
-  amount  Float
-  date     DateTime @default(now())
-  userId    String
-  user      User     @relation(fields: [userId], references: [clerkUserId],  onDelete: Cascade)
+  id String @id @default(cuid())
+
+  userId String
+
+  sleepHours   Float
+  sleepQuality Int
+
+  bedtime  String?
+  wakeTime String?
+
+  stressLevel   Int?
+  interruptions Int?
+
+  screenTime Float?
+
   createdAt DateTime @default(now())
-  @@index([userId])
+
+  user            User           @relation(fields: [userId], references: [id])
+  sleepAnalysisId String?
 }
+
+model SleepAnalysis {
+  id String @id @default(cuid())
+
+  userId String @unique
+
+  sleepScore Int
+  summary    String
+
+  recommendations Json
+  detectedIssues  Json
+
+  createdAt DateTime @default(now())
+}
+
