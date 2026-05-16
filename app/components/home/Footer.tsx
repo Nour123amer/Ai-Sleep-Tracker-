@@ -30,13 +30,13 @@ export default function Footer() {
           <h3 className="text-sm font-semibold text-gray-900">Navigation</h3>
 
           <div className="flex flex-col gap-2 text-sm text-gray-600">
-            <Link className="hover:text-purple-500" href="/">
+            <Link className="cursor-pointer hover:text-purple-500" href="/">
               Home
             </Link>
-            <Link className="hover:text-purple-500" href="/about">
+            <Link className="cursor-pointer hover:text-purple-500" href="/about">
               About
             </Link>
-            <Link className="hover:text-purple-500" href="/pricing">
+            <Link className="cursor-pointer hover:text-purple-500" href="/pricing">
               Pricing
             </Link>
           </div>
@@ -49,7 +49,7 @@ export default function Footer() {
             Join thousands improving their sleep quality.
           </p>
 
-          <button className="mt-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-purple-600 hover:scale-105 transition">
+          <button className="mt-2 cursor-pointer rounded-full bg-white px-4 py-2 text-sm font-medium text-purple-600 hover:scale-105 transition">
             Get Started
           </button>
         </div>

@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { toast } from 'sonner';
+import { Skeleton } from "@/components/ui/skeleton"
+
 
 export default function Contact() {
   const [firstName, setFirstName] = useState("");
@@ -9,14 +11,17 @@ export default function Contact() {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e:React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    const res = await fetch("/api/contact",{
+    const res = await fetch("/api/contact", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"      },
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         firstName,
         lastName,
@@ -26,10 +31,18 @@ export default function Contact() {
       })
     })
 
-    if(res.ok){
-     toast.success("Message sent successfully!");
-     console.log("result ===>", res)
+    if (res.ok) {
+      toast.success("Message sent successfully!");
+      console.log("result ===>", res)
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setSubject("");
+      setMessage(""); 
+      setIsLoading(false);
     }
+
+
 
   }
 
@@ -39,7 +52,7 @@ export default function Contact() {
   return (
     <section className="min-h-screen bg-linear-to-br from-pink-50 via-white to-fuchsia-50 py-16 px-6">
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
-        
+
         {/* Left Content */}
         <div>
           <p className="text-pink-500 font-semibold mb-3 tracking-wide uppercase">
@@ -51,7 +64,7 @@ export default function Contact() {
           </h1>
 
           <p className="text-gray-600 text-lg leading-8 mb-8">
-            Have a question, feedback, or project idea?  
+            Have a question, feedback, or project idea?
             We'd love to hear from you. Fill out the form and our team
             will get back to you as soon as possible.
           </p>
@@ -116,9 +129,9 @@ export default function Contact() {
                 </label>
 
                 <input
-                name='firstName'
-                value={firstName}
-                onChange={(e)=>{setFirstName(e.target.value)}}
+                  name='firstName'
+                  value={firstName}
+                  onChange={(e) => { setFirstName(e.target.value) }}
                   type="text"
                   placeholder="John"
                   className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:ring-2 focus:ring-pink-400 transition"
@@ -131,9 +144,9 @@ export default function Contact() {
                 </label>
 
                 <input
-                name='lastName'
-                value={lastName}
-                onChange={(e)=>{setLastName(e.target.value)}}
+                  name='lastName'
+                  value={lastName}
+                  onChange={(e) => { setLastName(e.target.value) }}
                   type="text"
                   placeholder="Doe"
                   className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:ring-2 focus:ring-pink-400 transition"
@@ -149,7 +162,7 @@ export default function Contact() {
               <input
                 name='email'
                 value={email}
-                onChange={(e)=>{setEmail(e.target.value)}}
+                onChange={(e) => { setEmail(e.target.value) }}
                 type="email"
                 placeholder="you@example.com"
                 className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:ring-2 focus:ring-pink-400 transition"
@@ -164,7 +177,7 @@ export default function Contact() {
               <input
                 name='subject'
                 value={subject}
-                onChange={(e)=>{setSubject(e.target.value)}}
+                onChange={(e) => { setSubject(e.target.value) }}
                 type="text"
                 placeholder="Project Discussion"
                 className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:ring-2 focus:ring-pink-400 transition"
@@ -179,7 +192,7 @@ export default function Contact() {
               <textarea
                 name='message'
                 value={message}
-                onChange={(e)=>{setMessage(e.target.value)}}
+                onChange={(e) => { setMessage(e.target.value) }}
                 rows={5}
                 placeholder="Write your message..."
                 className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:ring-2 focus:ring-pink-400 transition resize-none"
@@ -187,11 +200,18 @@ export default function Contact() {
             </div>
 
             <button
+              disabled={isLoading}
               type="submit"
               className="w-full cursor-pointer bg-linear-to-r from-pink-500 to-fuchsia-500 text-white py-3 rounded-xl font-semibold hover:opacity-90 transition flex items-center justify-center gap-2"
             >
-              Send Message
-              <Send size={18} />
+              {isLoading ?
+                <>
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <span>Sending...</span>
+                </>
+                :
+                 <>Send Message  <Send size={18} /> </>}
+                
             </button>
           </form>
         </div>
