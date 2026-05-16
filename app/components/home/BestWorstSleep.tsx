@@ -10,7 +10,7 @@ export const BestWorstSleep = () => {
 
     useEffect(() => {
 
-        const dataOfBestSleep =sleepData.filter(record => record.text === "Refreshed" || record.text === "Enerly Refreshed" 
+        const dataOfBestSleep =sleepData.filter(record => record.text === "Refreshed" || record.text === "Energitic" 
             && record.amount >= 7 );
         
         setBestSleep(dataOfBestSleep[0]);
