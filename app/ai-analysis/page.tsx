@@ -46,9 +46,16 @@ export default function AiAnalysis() {
     setIsLoading(false);
   }
 
+  const isValidAnalysis = (
+  result: AnalysisResponse | null
+): result is SleepAnalysisResult => {
+  return !!result && !("error" in result);
+};
+
 
   const downloadReport = () => {
-    if (!analysisResult) return;
+    if (!isValidAnalysis(analysisResult)) return;
+    console.log("analysis resullllt ===>", analysisResult)
 
     const doc = new jsPDF();
 
