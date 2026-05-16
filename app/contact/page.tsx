@@ -37,7 +37,7 @@ export default function Contact() {
 
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-fuchsia-50 py-16 px-6">
+    <section className="min-h-screen bg-linear-to-br from-pink-50 via-white to-fuchsia-50 py-16 px-6">
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
         
         {/* Left Content */}
@@ -188,7 +188,7 @@ export default function Contact() {
 
             <button
               type="submit"
-              className="w-full cursor-pointer bg-gradient-to-r from-pink-500 to-fuchsia-500 text-white py-3 rounded-xl font-semibold hover:opacity-90 transition flex items-center justify-center gap-2"
+              className="w-full cursor-pointer bg-linear-to-r from-pink-500 to-fuchsia-500 text-white py-3 rounded-xl font-semibold hover:opacity-90 transition flex items-center justify-center gap-2"
             >
               Send Message
               <Send size={18} />

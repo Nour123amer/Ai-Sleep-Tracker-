@@ -3,7 +3,7 @@ import { BookOpen, Rocket, Brain } from "lucide-react";
 
 export default function OurStory() {
   return (
-    <section className="relative py-24 px-6 bg-gradient-to-b from-white via-purple-50 to-white">
+    <section className="relative py-24 px-6 bg-linear-to-b from-white via-purple-50 to-white">
       
       {/* glow background */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[450px] h-[450px] bg-purple-300/20 blur-3xl rounded-full" />

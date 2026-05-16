@@ -28,7 +28,7 @@ model Record {
   userId String
 
   sleepHours   Float
-  sleepQuality Int
+  sleepQuality String
 
   bedtime  String?
   wakeTime String?

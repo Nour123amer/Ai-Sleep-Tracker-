@@ -21,7 +21,7 @@ export default function Mession() {
         {/* cards */}
         <div className="grid md:grid-cols-3 gap-6">
           
-          <div className="p-6 rounded-2xl border bg-gradient-to-b from-purple-50 to-white shadow-sm hover:shadow-md transition">
+          <div className="p-6 rounded-2xl border bg-linear-to-b from-purple-50 to-white shadow-sm hover:shadow-md transition">
             <Moon className="text-purple-500 mx-auto mb-3" />
             <h3 className="font-semibold text-lg mb-2">Better Sleep</h3>
             <p className="text-gray-500 text-sm">
@@ -29,7 +29,7 @@ export default function Mession() {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl border bg-gradient-to-b from-pink-50 to-white shadow-sm hover:shadow-md transition">
+          <div className="p-6 rounded-2xl border bg-linear-to-b from-pink-50 to-white shadow-sm hover:shadow-md transition">
             <HeartPulse className="text-pink-500 mx-auto mb-3" />
             <h3 className="font-semibold text-lg mb-2">Health Focus</h3>
             <p className="text-gray-500 text-sm">
@@ -37,7 +37,7 @@ export default function Mession() {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl border bg-gradient-to-b from-indigo-50 to-white shadow-sm hover:shadow-md transition">
+          <div className="p-6 rounded-2xl border bg-linear-to-b from-indigo-50 to-white shadow-sm hover:shadow-md transition">
             <Target className="text-indigo-500 mx-auto mb-3" />
             <h3 className="font-semibold text-lg mb-2">Smart Insights</h3>
             <p className="text-gray-500 text-sm">

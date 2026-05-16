@@ -61,7 +61,6 @@ export default async function addSleepRecord(formData: FormData): Promise<Record
         const existingRecord = await db.record.findFirst({
             where: {
                 userId: user.id,
-                date: date
             }
         });
 
@@ -71,25 +70,25 @@ export default async function addSleepRecord(formData: FormData): Promise<Record
             const updatedRecord = await db.record.update({
                 where: { id: existingRecord.id },
                 data: {
-                    text: text,
-                    amount: amount,
-                    date: new Date(date)
+                    sleepQuality: text,
+                    sleepHours: amount,
+                    createdAt: new Date(date)
                 }
             })
 
             recordData = {
-                text: updatedRecord.text,
-                amount: updatedRecord.amount,
-                date: updatedRecord.date.toISOString(),
+                text: updatedRecord.sleepQuality,
+                amount: updatedRecord.sleepHours,
+                date: updatedRecord.createdAt.toISOString(),
                 id: updatedRecord.id
             }
         } else {
             // create new record
             const newRecord = await db.record.create({
                 data: {
-                    text: text,
-                    amount: amount,
-                    date: new Date(date),
+                    sleepQuality: text,
+                    sleepHours: amount,
+                    createdAt: new Date(date),
                     userId: user.id,
                 }
             })
@@ -97,7 +96,7 @@ export default async function addSleepRecord(formData: FormData): Promise<Record
             console.log("new record", newRecord)
 
             recordData = {
-                text: newRecord.text,
+                text: newRecord.sleepQuality,
                 amount: newRecord.sleepHours,
                 date: newRecord.createdAt.toISOString(),
                 id: newRecord.id
@@ -200,9 +199,9 @@ export async function analyzeSleep(formData: FormData) {
 
     await db.record.create({
         data: {
-            text: text,
-            amount: amount,
-            date: new Date(date),
+            sleepQuality: text,
+            sleepHours: amount,
+            createdAt: new Date(date),
             userId: user.id,
         }
     });

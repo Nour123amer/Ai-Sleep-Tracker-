@@ -24,8 +24,8 @@ export default async function getUserRecord():Promise<{
             }
         });
 
-        const record = records.reduce((total, record) => total + record.amount, 0);
-        const daysWithRecords = records.filter((record)=> record.amount > 0).length;
+        const record = records.reduce((total, record) => total + record.sleepHours, 0);
+        const daysWithRecords = records.filter((record)=> record.sleepHours > 0).length;
         return{
             record,
             daysWithRecords

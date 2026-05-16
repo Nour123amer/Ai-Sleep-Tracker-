@@ -10,7 +10,7 @@ export default function Footer() {
         {/* Brand */}
         <div className="space-y-3">
           <h2 className="text-xl font-bold">
-            <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
               SleepTracker
             </span>
           </h2>

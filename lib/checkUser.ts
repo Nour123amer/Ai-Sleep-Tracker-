@@ -10,7 +10,7 @@ export const checkUser = async () => {
   // check if the user is already in the db
   const loggedInUser = await db.user.findUnique({
     where: {
-      clerkId: user.id,
+      clerkUserId: user.id,
     },
   
   })

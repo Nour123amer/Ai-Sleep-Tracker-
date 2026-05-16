@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/home/Navbar/page";
-import Footer from "./components/home/Footer/page";
+import Navbar from "./components/home/Navbar";
+import Footer from "./components/home/Footer";
 import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import Providers from "./providers";
 import { Toaster, toast } from 'sonner';

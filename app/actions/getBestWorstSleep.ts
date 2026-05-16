@@ -20,7 +20,7 @@ export default async function getBestWorstSleep():Promise<{
                 userId
             },
             select:{
-                amount: true
+                sleepHours: true
             }
         });
 
@@ -31,7 +31,7 @@ export default async function getBestWorstSleep():Promise<{
             }
         }
 
-        const amounts = records.map((records)=> records.amount);
+        const amounts = records.map((records)=> records.sleepHours);
         const bestSleep = Math.max(...amounts);
         const worstSleep = Math.min(...amounts);
         return{ bestSleep, worstSleep}

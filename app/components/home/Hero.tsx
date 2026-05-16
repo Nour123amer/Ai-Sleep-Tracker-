@@ -17,7 +17,7 @@ export default function Hero() {
 
         <h1 className="text-4xl font-extrabold leading-tight md:text-5xl">
           Track your{" "}
-          <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
             sleep quality
           </span>{" "}
           effortlessly

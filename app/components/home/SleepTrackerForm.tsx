@@ -81,7 +81,7 @@ export const SleepTrackerForm = () => {
                         step='0.5'
                         value={amount}
                         onChange={(e) => { setAmount(parseFloat(e.target.value)) }}
-                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600" min="0" max="12" step="0.5" />
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600" min="0" max="12"  />
                     <p className="text-center mt-2 text-sm text-gray-600">{amount} hours</p>
                     <button type="submit"
                         className="w-full cursor-pointer py-3 bg-linear-to-r from-fuchsia-500 to-pink-500 text-white font-bold rounded-lg hover:opacity-90 transition-opacity"

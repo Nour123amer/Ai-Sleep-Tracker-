@@ -1,17 +1,11 @@
 "use server";
-
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { GoogleGenAI } from "@google/genai";
-import { SleepRecord } from "../context/SleepDataContext";
 
 
 // The client gets the API key from the environment variable `GEMINI_API_KEY`.
-const ai = new GoogleGenAI({apiKey: process.env.GEMINI_API_KEY!});
-
-// const client = new OpenAI({
-//   apiKey: process.env.OPENAI_API_KEY,
-// });
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
 
 export type SleepAnalysisResult = {
   sleepScore: number;
@@ -20,54 +14,33 @@ export type SleepAnalysisResult = {
   recommendations: string[];
 };
 
-export async function analyzeSleep(data:any): Promise<SleepAnalysisResult | null> {
+export async function analyzeSleep(data: any): Promise<SleepAnalysisResult | null> {
   const { userId: clerkId } = await auth();
   console.log("USER ID:", clerkId);
   if (!clerkId) return null;
 
-  if(!data || data.length === 0){
-    return null }
+  if (!data || data.length === 0) {
+    return null
+  }
 
-const user = await db.user.findUnique({
-  where: {
-    clerkUserId: clerkId,
-  },
-});
+  const user = await db.user.findUnique({
+    where: {
+      clerkUserId: clerkId,
+    },
+  });
 
-if (!user) {
-  throw new Error("User not found");
-}
-
-// if (!user) return null;
-//   const record = await db.record.findMany({
-//     where: {
-//      userId: user.id,
-//     },
-//     orderBy: {
-//       createdAt: "desc"
-//     }
-//   });
-
-//   console.log("RECORDS:", record);
-
-//   if (!record || record.length === 0) return null;
-
-  // const simplified = record.map(r => ({
-  //   sleepHours: r.sleepHours,
-  //   sleepQuality: r.sleepQuality,
-  //   stressLevel: r.stressLevel,
-  //   screenTime: r.screenTime,
-  //   date: r.createdAt,
-  // }));
+  if (!user) {
+    throw new Error("User not found");
+  }
 
   const result = await ai.models.generateContent({
-  model: "gemini-3-flash-preview",
-  contents:  "Say hello",
+    model: "gemini-3-flash-preview",
+    contents: "Say hello",
   }
- 
-);
 
-console.log("test ai =>",result);
+  );
+
+  console.log("test ai =>", result);
 
   const prompt = `
 You are a professional sleep analyst.
@@ -101,49 +74,29 @@ Return JSON:
     });
     const text = completion.text;
 
-    const cleaned = text?.replace(/```json|```/g, "").trim();
+    const cleaned = text?.replace(/```json|```/g, "").trim() || "";
 
-     const parsed = JSON.parse(cleaned);
+    const parsed = JSON.parse(cleaned);
 
-    // await db.sleepAnalysis.create({
-    //   data: {
-    //     userId: user.id,
-    //     sleepScore: parsed.sleepScore,
-    //     summary: parsed.summary,
-    //     detectedIssues: parsed.detectedIssues,
-    //     recommendations: parsed.recommendations,
-    //   },
-    // });
     await db.sleepAnalysis.upsert({
-  where: {
-    userId: user.id,
-  },
-  update: {
-    sleepScore: parsed.sleepScore,
-    summary: parsed.summary,
-    detectedIssues: parsed.detectedIssues,
-    recommendations: parsed.recommendations,
-  },
-  create: {
-    userId: user.id,
-    sleepScore: parsed.sleepScore,
-    summary: parsed.summary,
-    detectedIssues: parsed.detectedIssues,
-    recommendations: parsed.recommendations,
-  },
-});
+      where: {
+        userId: user.id,
+      },
+      update: {
+        sleepScore: parsed.sleepScore,
+        summary: parsed.summary,
+        detectedIssues: parsed.detectedIssues,
+        recommendations: parsed.recommendations,
+      },
+      create: {
+        userId: user.id,
+        sleepScore: parsed.sleepScore,
+        summary: parsed.summary,
+        detectedIssues: parsed.detectedIssues,
+        recommendations: parsed.recommendations,
+      },
+    });
 
-//     const saved = await db.sleepAnalysis.create({
-//   data: {
-//     userId: user.id,
-//     sleepScore: parsed.sleepScore,
-//     summary: parsed.summary,
-//     detectedIssues: parsed.detectedIssues,
-//     recommendations: parsed.recommendations,
-//   },
-// });
-
-// console.log("SAVED =>", saved);
 
     return parsed;
   } catch (error: any) {

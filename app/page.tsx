@@ -1,15 +1,15 @@
 import Image from "next/image";
-import Hero from "./components/home/Hero/page";
-import FAQ from "./components/home/FAQ/page";
-import Testimeniols from "./components/home/Testimeniols/page";
+import Hero from "./components/home/Hero";
+import FAQ from "./components/home/FAQ";
+import Testimeniols from "./components/home/Testimeniols";
 import { currentUser } from "@clerk/nextjs/server";
-import { UserInfo } from "./components/home/UserInfo/page";
-import { AverageSleepCard } from "./components/home/AverageSleepCard/page";
-import { SleepTrackerForm } from "./components/home/SleepTrackerForm/page";
-import { BestWorstSleep } from "./components/home/BestWorstSleep/page";
-import { SleepHistory } from "./components/home/SleepHistory/page";
-import SleepRecordChart from "./components/home/SleepRecordChart/page";
+import { UserInfo } from "./components/home/UserInfo";
+import { SleepTrackerForm } from "./components/home/SleepTrackerForm";
+import { BestWorstSleep } from "./components/home/BestWorstSleep";
+import { SleepHistory } from "./components/home/SleepHistory";
+import SleepRecordChart from "./components/home/SleepRecordChart";
 import { syncUser } from "@/lib/syncUser";
+import { AverageSleepCard } from "./components/home/AverageSleepCard";
 
 
 export default async function Home() {
