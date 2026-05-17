@@ -5,6 +5,7 @@ import { SleepAnalysisResult } from '../actions/analyzeSleep';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Card } from "@/components/ui/card"
 import jsPDF from "jspdf";
+import { toast } from 'sonner';
 
 
 type AnalysisResponse =
@@ -47,10 +48,10 @@ export default function AiAnalysis() {
   }
 
   const isValidAnalysis = (
-  result: AnalysisResponse | null
-): result is SleepAnalysisResult => {
-  return !!result && !("error" in result);
-};
+    result: AnalysisResponse | null
+  ): result is SleepAnalysisResult => {
+    return !!result && !("error" in result);
+  };
 
 
   const downloadReport = () => {
@@ -279,15 +280,17 @@ export default function AiAnalysis() {
 
               </Card>
             ) : (
-              <div className="max-w-4xl mx-auto mt-10 p-6 rounded-2xl text-purple-600 shadow-2xl border border-teal-500/20">
+              <div className="max-w-4xl mx-auto mt-10 p-6 rounded-2xl text-slate-800 bg-white shadow-xl border border-slate-200">
 
                 {/* Header */}
                 <div className="flex items-center justify-between mb-6">
+
                   <h2 className="text-xl font-bold from-purple-600 via-pink-500 to-purple-500 bg-linear-to-r text-transparent bg-clip-text">
                     Sleep AI Analysis
                   </h2>
 
-                  <div className='flex gap-6 items-center'>
+                  <div className="flex gap-6 items-center">
+
                     <div className="px-4 py-2 rounded-full   text-purple-500 font-semibold border border-purple-400/30">
                       Score: {analysisResult?.sleepScore}/100
                     </div>
@@ -295,32 +298,35 @@ export default function AiAnalysis() {
                     <Button
                       onClick={downloadReport}
                       className='px-4 cursor-pointer py-5 rounded-full bg-linear-to-r from-purple-600 via-pink-500 to-purple-600 text-white'
-                    >Download Analysis</Button>
-                  </div>
+                    >
+                      Download Analysis
+                    </Button>
 
+                  </div>
                 </div>
 
                 {/* Progress Bar */}
-                <div className="w-full bg-slate-800/60 rounded-full h-3 mb-6 overflow-hidden">
+                <div className="w-full bg-slate-100 rounded-full h-3 mb-6 overflow-hidden">
                   <div
-                    className="h-3 rounded-full bg-linear-to-r from-purple-400 via-cyan-400 to-teal-400"
+                    className="h-3 rounded-full bg-gradient-to-r from-indigo-500 via-sky-400 to-emerald-400"
                     style={{ width: `${analysisResult?.sleepScore}%` }}
                   />
                 </div>
 
                 {/* Summary */}
                 <div className="mb-6">
-                  <h3 className="text-lg font-semibold mb-2 from-purple-600 via-pink-500 to-purple-500 bg-linear-to-r text-transparent bg-clip-text">
+                  <h3 className="text-lg font-semibold mb-2 text-slate-900">
                     Summary
                   </h3>
-                  <p className="text-slate-400 leading-relaxed">
+
+                  <p className="text-slate-600 leading-relaxed">
                     {analysisResult?.summary}
                   </p>
                 </div>
 
                 {/* Issues */}
                 <div className="mb-6">
-                  <h3 className="text-lg font-semibold mb-3 from-purple-600 via-pink-500 to-purple-500 bg-linear-to-r text-transparent bg-clip-text">
+                  <h3 className="text-lg font-semibold mb-3 text-slate-900">
                     Detected Issues
                   </h3>
 
@@ -328,7 +334,7 @@ export default function AiAnalysis() {
                     {analysisResult?.detectedIssues?.map((issue, index) => (
                       <div
                         key={index}
-                        className="p-3 rounded-lg  border border-pink-400/20 text-sm text-pink-400"
+                        className="p-3 rounded-lg border border-rose-200 bg-rose-50 text-rose-700 text-sm"
                       >
                         {issue}
                       </div>
@@ -338,7 +344,7 @@ export default function AiAnalysis() {
 
                 {/* Recommendations */}
                 <div>
-                  <h3 className="text-lg font-semibold mb-3 text-emerald-300">
+                  <h3 className="text-lg font-semibold mb-3 text-slate-900">
                     Recommendations
                   </h3>
 
@@ -346,13 +352,14 @@ export default function AiAnalysis() {
                     {analysisResult?.recommendations?.map((rec, index) => (
                       <div
                         key={index}
-                        className="p-3 rounded-lg  border border-emerald-400/20 text-sm text-emerald-400"
+                        className="p-3 rounded-lg border border-emerald-200 bg-emerald-50 text-emerald-700 text-sm"
                       >
                         {rec}
                       </div>
                     ))}
                   </div>
                 </div>
+
               </div>
             )
           }
