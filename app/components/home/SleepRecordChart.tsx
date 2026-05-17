@@ -1,8 +1,9 @@
 
 "use client"
+import { SleepDataContext } from '@/app/context/SleepDataContext';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Bar, BarChart, BarShapeProps, CartesianGrid, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 
@@ -16,16 +17,12 @@ const MyCustomShape = (props: BarShapeProps) => {
 };
 
 const SleepRecordChart = () => {
-    const [sleepData, setSleepData] = useState([]);
+    const context = useContext(SleepDataContext);
+
+  const sleepData = context?.sleepData || [];
     const router = useRouter();
 
-    useEffect(() => {
-        const storedData = localStorage.getItem('sleepData');
-        if (storedData) {
-            setSleepData(JSON.parse(storedData));
-        }
-        console.log("Loaded sleep data from localStorage:", storedData);
-    }, []);
+    
 
     return (
         <>
