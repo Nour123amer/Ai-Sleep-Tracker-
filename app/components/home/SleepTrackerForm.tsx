@@ -12,8 +12,8 @@ export const SleepTrackerForm = () => {
     const [alertMessage, setAlertMessage] = useState<string | null>(null);
     const [alertType, setAlertType] = useState<'success' | 'error' | null>(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [sleepQuality, setSleepQuality] = useState('');
-    const {addSleepRecord} = useContext(SleepDataContext)!;
+    const [sleepQuality, setSleepQuality] = useState('Refreshed');
+    const { addSleepRecord } = useContext(SleepDataContext)!;
 
     const clientAction = async (formData: FormData) => {
         setIsLoading(true);
@@ -30,8 +30,10 @@ export const SleepTrackerForm = () => {
             id: Math.random().toString(36).substr(2, 9)
         })
 
+
+
         // const { error } = await addSleepRecord(formData);
-       console.log(Object.fromEntries(formData.entries()));
+        console.log(Object.fromEntries(formData.entries()));
 
     }
     return (
@@ -44,14 +46,18 @@ export const SleepTrackerForm = () => {
                     const formData = new FormData(formRef.current!);
                     clientAction(formData);
                     console.log(Object.fromEntries(formData.entries()));
+                    setAmount(6);
+                    setText("");
+                    setDate("");
                 }}
                 className="grid grid-cols-2 gap-4 mb-6">
                 <div>
                     <label className="block text-xs font-semibold mb-1">Sleep Quality</label>
                     <select
-                      name="sleepQuality"
+                        value={sleepQuality}
+                        name="sleepQuality"
                         onChange={(e) => { setSleepQuality(e.target.value) }}
-                    className="w-full p-2 border rounded-md text-gray-500 bg-white">
+                        className="w-full p-2 border rounded-md text-gray-500 bg-white">
                         <option
                             value='' disabled>Sleep quality...</option>
                         <option
@@ -68,6 +74,7 @@ export const SleepTrackerForm = () => {
                     <label className="block text-xs font-semibold mb-1">Sleep Date</label>
                     <input type="date"
                         name="date"
+                        value={date}
                         onChange={(e) => { setDate(e.target.value) }}
                         className="w-full p-2 border rounded-md text-gray-500" defaultValue="2026-05-12" />
                 </div>
@@ -81,12 +88,12 @@ export const SleepTrackerForm = () => {
                         step='0.5'
                         value={amount}
                         onChange={(e) => { setAmount(parseFloat(e.target.value)) }}
-                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600" min="0" max="12"  />
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600" min="0" max="12" />
                     <p className="text-center mt-2 text-sm text-gray-600">{amount} hours</p>
                     <button type="submit"
                         className="w-full cursor-pointer py-3 bg-linear-to-r from-fuchsia-500 to-pink-500 text-white font-bold rounded-lg hover:opacity-90 transition-opacity"
-                        onClick={()=>{toast.success("Record added successfully!")}}
-                        >
+                        onClick={() => { toast.success("Record added successfully!") }}
+                    >
                         Add Sleep Record
                     </button>
                 </div>
