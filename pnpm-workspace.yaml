@@ -1,3 +1,11 @@
 ignoredBuiltDependencies:
+  - '@clerk/shared'
+  - '@google/genai'
+  - '@prisma/engines'
+  - core-js
+  - esbuild
+  - msw
+  - prisma
+  - protobufjs
   - sharp
   - unrs-resolver
